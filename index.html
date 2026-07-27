@@ -1,32 +1,61 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Bingo Casa de Luz - Jugadores</title>
-<style>
-*{box-sizing:border-box}body{margin:0;font-family:system-ui;background:linear-gradient(#fff8e8,#f4e4c4);color:#3b2b20;min-height:100vh}
-.wrap{max-width:760px;margin:auto;padding:20px;text-align:center}h1{font-size:clamp(30px,8vw,50px);margin:12px 0 2px}.sub{font-size:20px}
-.panel{margin-top:20px;background:#fff;border-radius:24px;padding:20px;box-shadow:0 8px 30px #0002}
-.ball{width:155px;height:155px;border-radius:50%;margin:20px auto;display:grid;place-items:center;background:#d7a72f;border:9px solid #f1d475;color:white;font-size:66px;font-weight:900}
-button{border:0;border-radius:15px;padding:15px 20px;margin:6px;font-size:18px;font-weight:800}.draw{background:#8b5e34;color:white}.reset{background:#eee1ca}
-.grid{display:grid;grid-template-columns:repeat(10,1fr);gap:7px;margin-top:15px}.n{aspect-ratio:1;border-radius:50%;display:grid;place-items:center;background:#eee8df;font-weight:700}.hit{background:#d7a72f;color:white}
-.status{font-weight:650;min-height:28px}.live{display:inline-block;background:#e8f4e8;padding:7px 12px;border-radius:999px;margin-top:8px}
-@media(max-width:520px){.grid{grid-template-columns:repeat(8,1fr)}}
-</style>
-</head>
-<body><div class="wrap"><div>✨ 🎱 ✨</div><h1>Bingo Virtual</h1><div class="sub"><b>Casa de Luz</b></div>
-<div class="panel"><div class="live">● EN VIVO</div><p>Última bolilla</p><div id="ball" class="ball">—</div><div id="status" class="status">Esperando que comience el sorteo…</div>
-<h2>Números sorteados</h2><div id="grid" class="grid"></div></div></div><script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-database-compat.js"></script><script>
-const firebaseConfig = {
-  apiKey: "AIzaSyD-vbevf0AjB_-2SdLXyQT8Ao1q5xj0Lps",
-  authDomain: "bingo-ea9ad.firebaseapp.com",
-  databaseURL: "https://bingo-ea9ad-default-rtdb.firebaseio.com",
-  projectId: "bingo-ea9ad",
-  storageBucket: "bingo-ea9ad.firebasestorage.app",
-  messagingSenderId: "1042802266359",
-  appId: "1:1042802266359:web:cb17e196beeeeb696783f2"
-};
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-const max=75, ref=db.ref("bingoCasaDeLuz");let drawn=[];
-function render(){let g=document.getElementById("grid");g.innerHTML="";for(let i=1;i<=max;i++){let e=document.createElement("div");e.className="n"+(drawn.includes(i)?" hit":"");e.textContent=i;g.appendChild(e)}}
-ref.on("value",s=>{let d=s.val()||{drawn:[],current:null};drawn=d.drawn||[];document.getElementById("ball").textContent=d.current??"—";document.getElementById("status").textContent=drawn.length?`Ya salieron ${drawn.length} bolillas`:"Esperando que comience el sorteo…";render()});
-render();</script></body></ht
+<title>Bingo Virtual - Casa de Luz</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:linear-gradient(#fff8e8,#f4e4c4);
+  color:#3b2b20;
+  text-align:center;
+}
+
+.wrap{
+  max-width:760px;
+  margin:auto;
+  padding:20px;
+}
+
+h1{
+  margin-bottom:5px;
+  color:#8b4513;
+}
+
+.panel{
+  margin-top:20px;
+  background:white;
+  padding:20px;
+  border-radius:20px;
+  box-shadow:0 5px 20px #0002;
+}
+
+.ball{
+  width:155px;
+  height:155px;
+  margin:20px auto;
+  border-radius:50%;
+  background:#8b4513;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:65px;
+  font-weight:bold;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(10,1fr);
+  gap:6px;
+}
+
+.number{
+  padding:8px 2px;
+  background:#eee
