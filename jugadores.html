@@ -3,20 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Bingo Casa de Luz - Jugadores</title>
+<title>Bingo Casa de Luz</title>
 
 <style>
 *{box-sizing:border-box}
 
 body{
   margin:0;
+  padding:25px 10px;
   font-family:Arial,sans-serif;
+  text-align:center;
   background:#fff3d9;
   color:#222;
-  text-align:center;
-  min-height:100vh;
-  padding:25px 12px;
 }
 
 h1{
@@ -26,37 +24,147 @@ h1{
 
 h2{
   font-size:30px;
-  margin:10px 0 35px;
+  margin:10px 0 40px;
 }
 
-.subtitulo{
+h3{
   font-size:25px;
-  margin-bottom:20px;
+  font-weight:normal;
 }
 
 .carton{
+  max-width:600px;
+  margin:30px auto;
   background:white;
-  max-width:620px;
-  margin:auto;
-  padding:20px;
+  padding:18px;
   border-radius:25px;
   box-shadow:0 8px 20px rgba(0,0,0,.15);
 }
 
-.encabezado,
 .fila{
   display:grid;
   grid-template-columns:repeat(5,1fr);
   gap:8px;
+  margin-bottom:8px;
 }
 
-.encabezado div{
+.letra{
   background:#8524ad;
   color:white;
-  font-size:32px;
+  padding:15px 2px;
+  font-size:30px;
   font-weight:bold;
-  padding:15px 5px;
   border-radius:12px;
 }
 
-.f
+.numero{
+  background:#f4e5f8;
+  border:2px solid #8524ad;
+  padding:16px 2px;
+  font-size:24px;
+  font-weight:bold;
+  border-radius:12px;
+  cursor:pointer;
+}
+
+.numero.marcado{
+  background:#8524ad;
+  color:white;
+}
+
+.libre{
+  background:#ffd966;
+}
+
+p{
+  font-size:20px;
+}
+
+button{
+  margin-top:15px;
+  background:#8524ad;
+  color:white;
+  border:0;
+  border-radius:15px;
+  padding:18px 30px;
+  font-size:21px;
+  font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🎱 BINGO VIRTUAL</h1>
+<h2>✨ Casa de Luz ✨</h2>
+
+<h3>Tu cartón</h3>
+
+<div class="carton">
+
+<div class="fila">
+<div class="letra">B</div>
+<div class="letra">I</div>
+<div class="letra">N</div>
+<div class="letra">G</div>
+<div class="letra">O</div>
+</div>
+
+<div class="fila">
+<div class="numero">3</div>
+<div class="numero">18</div>
+<div class="numero">32</div>
+<div class="numero">49</div>
+<div class="numero">63</div>
+</div>
+
+<div class="fila">
+<div class="numero">7</div>
+<div class="numero">21</div>
+<div class="numero">35</div>
+<div class="numero">52</div>
+<div class="numero">67</div>
+</div>
+
+<div class="fila">
+<div class="numero">9</div>
+<div class="numero">24</div>
+<div class="numero libre">★</div>
+<div class="numero">55</div>
+<div class="numero">70</div>
+</div>
+
+<div class="fila">
+<div class="numero">12</div>
+<div class="numero">27</div>
+<div class="numero">41</div>
+<div class="numero">58</div>
+<div class="numero">72</div>
+</div>
+
+<div class="fila">
+<div class="numero">15</div>
+<div class="numero">30</div>
+<div class="numero">44</div>
+<div class="numero">60</div>
+<div class="numero">75</div>
+</div>
+
+</div>
+
+<p>👉 Tocá cada número para marcarlo.</p>
+
+<button onclick="location.reload()">
+🎟️ NUEVO CARTÓN
+</button>
+
+<script>
+document.querySelectorAll(".numero").forEach(function(casilla){
+  casilla.addEventListener("click",function(){
+    this.classList.toggle("marcado");
+  });
+});
+</script>
+
+</body>
+</html>
