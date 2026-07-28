@@ -7,18 +7,16 @@
 <title>Bingo Casa de Luz - Jugadores</title>
 
 <style>
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
   margin:0;
   font-family:Arial,sans-serif;
   background:#fff3d9;
-  color:#3b2b20;
+  color:#222;
   text-align:center;
   min-height:100vh;
-  padding:25px 15px;
+  padding:25px 12px;
 }
 
 h1{
@@ -27,83 +25,38 @@ h1{
 }
 
 h2{
-  font-size:28px;
-  margin:10px 0 30px;
+  font-size:30px;
+  margin:10px 0 35px;
 }
 
-.tarjeta{
-  background:white;
-  max-width:420px;
-  margin:auto;
-  padding:25px;
-  border-radius:20px;
-  box-shadow:0 5px 18px rgba(0,0,0,.15);
-}
-
-.numero{
-  font-size:100px;
-  font-weight:bold;
-  margin:20px 0;
-}
-
-.estado{
-  font-size:20px;
-  font-weight:bold;
+.subtitulo{
+  font-size:25px;
   margin-bottom:20px;
 }
 
-.historial{
-  margin-top:25px;
-  font-size:18px;
-  line-height:1.6;
-}
-</style>
-</head>
-
-<body>
-
-<h1>🎱 BINGO VIRTUAL</h1>
-<h2>✨ Casa de Luz ✨</h2>
-
-<div class="tarjeta">
-
-  <h3>Número sorteado</h3>
-
-  <div id="numero" class="numero">--</div>
-
-  <div id="estado" class="estado">
-    Esperando el próximo número...
-  </div>
-
-  <div class="historial">
-    <strong>Números sorteados:</strong>
-    <div id="historial">Todavía no hay números.</div>
-  </div>
-
-</div>
-
-<script>
-
-function actualizar(){
-  const numero = localStorage.getItem("bingoNumero");
-  const historial = localStorage.getItem("bingoHistorial");
-
-  if(numero){
-    document.getElementById("numero").textContent = numero;
-    document.getElementById("estado").textContent =
-      "🎉 Número sorteado";
-  }
-
-  if(historial){
-    document.getElementById("historial").textContent = historial;
-  }
+.carton{
+  background:white;
+  max-width:620px;
+  margin:auto;
+  padding:20px;
+  border-radius:25px;
+  box-shadow:0 8px 20px rgba(0,0,0,.15);
 }
 
-actualizar();
+.encabezado,
+.fila{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:8px;
+}
 
-setInterval(actualizar,1000);
+.encabezado div{
+  background:#8524ad;
+  color:white;
+  font-size:32px;
+  font-weight:bold;
+  padding:15px 5px;
+  border-radius:12px;
+}
 
-</script>
-
-</body>
-</html>
+.f
