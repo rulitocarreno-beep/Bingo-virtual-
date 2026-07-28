@@ -1,95 +1,61 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cartón Bingo - Casa de Luz</title>
+
+<title>Bingo Casa de Luz - Jugadores</title>
 
 <style>
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
 
 body{
   margin:0;
-  padding:20px;
   font-family:Arial,sans-serif;
-  text-align:center;
   background:#fff3d9;
-  color:#222;
+  color:#3b2b20;
+  text-align:center;
+  min-height:100vh;
+  padding:25px 15px;
 }
 
 h1{
-  font-size:32px;
-  margin-bottom:5px;
+  font-size:38px;
+  margin:20px 0 5px;
 }
 
 h2{
-  font-size:24px;
-  margin-top:5px;
-}
-
-.carton{
-  max-width:430px;
-  margin:25px auto;
-  background:white;
-  padding:15px;
-  border-radius:18px;
-  box-shadow:0 5px 20px #0003;
-}
-
-.titulo{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:5px;
-  margin-bottom:5px;
-}
-
-.titulo div{
-  background:#7b1fa2;
-  color:white;
   font-size:28px;
-  font-weight:bold;
-  padding:10px 0;
-  border-radius:8px;
+  margin:10px 0 30px;
 }
 
-.numeros{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:5px;
+.tarjeta{
+  background:white;
+  max-width:420px;
+  margin:auto;
+  padding:25px;
+  border-radius:20px;
+  box-shadow:0 5px 18px rgba(0,0,0,.15);
 }
 
 .numero{
-  height:62px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border:2px solid #7b1fa2;
-  border-radius:10px;
-  font-size:24px;
+  font-size:100px;
   font-weight:bold;
-  cursor:pointer;
+  margin:20px 0;
 }
 
-.numero.marcado{
-  background:#7b1fa2;
-  color:white;
+.estado{
+  font-size:20px;
+  font-weight:bold;
+  margin-bottom:20px;
 }
 
-.libre{
-  background:#ffd54f;
-  font-size:16px;
-}
-
-button{
-  margin-top:20px;
-  padding:15px 25px;
+.historial{
+  margin-top:25px;
   font-size:18px;
-  font-weight:bold;
-  border:0;
-  border-radius:12px;
-  background:#7b1fa2;
-  color:white;
+  line-height:1.6;
 }
 </style>
 </head>
@@ -99,22 +65,45 @@ button{
 <h1>🎱 BINGO VIRTUAL</h1>
 <h2>✨ Casa de Luz ✨</h2>
 
-<p>Tu cartón</p>
+<div class="tarjeta">
 
-<div class="carton">
+  <h3>Número sorteado</h3>
 
-  <div class="titulo">
-    <div>B</div>
-    <div>I</div>
-    <div>N</div>
-    <div>G</div>
-    <div>O</div>
+  <div id="numero" class="numero">--</div>
+
+  <div id="estado" class="estado">
+    Esperando el próximo número...
   </div>
 
-  <div class="numeros" id="carton"></div>
+  <div class="historial">
+    <strong>Números sorteados:</strong>
+    <div id="historial">Todavía no hay números.</div>
+  </div>
 
 </div>
 
-<p>👉 Tocá cada número para marcarlo.</p>
+<script>
 
-<button onclick="nuevoCarton()">🎟️ NUEVO CARTÓN</button>
+function actualizar(){
+  const numero = localStorage.getItem("bingoNumero");
+  const historial = localStorage.getItem("bingoHistorial");
+
+  if(numero){
+    document.getElementById("numero").textContent = numero;
+    document.getElementById("estado").textContent =
+      "🎉 Número sorteado";
+  }
+
+  if(historial){
+    document.getElementById("historial").textContent = historial;
+  }
+}
+
+actualizar();
+
+setInterval(actualizar,1000);
+
+</script>
+
+</body>
+</html>
