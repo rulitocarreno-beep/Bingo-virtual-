@@ -1,12 +1,1 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Bingo Casa de Luz</title>
-</head>
-<body>
-<h1>BINGO VIRTUAL</h1>
-<h2>Casa de Luz</h2>
-<p>La página funciona correctamente.</p>
-</body>
-</html>
+<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Bingo Casa de Luz</title></head><body style="text-align:center;font-family:Arial;background:#fff5df;padding:20px"><h1>🎱 BINGO VIRTUAL</h1><h2>✨ Casa de Luz ✨</h2><h3>Número sorteado</h3><div id="n" style="font-size:80px;font-weight:bold;margin:30px">--</div><button onclick="s()" style="font-size:22px;padding:15px">🎲 SORTEAR NÚMERO</button><p id="h">Números sorteados:</p><script>let u=[];function s(){let x;do{x=Math.floor(Math.random()*90)+1}while(u.includes(x));u.push(x);document.getElementById("n").innerText=x;document.getElementById("h").innerText="Números sorteados: "+u.join(" - ")}</script></body></html>
