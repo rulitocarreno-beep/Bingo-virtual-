@@ -191,7 +191,60 @@ for(let fila=0;fila<5;fila++){
 
  zona.appendChild(nuevaFila);
 }
+// ===== CONEXIÓN CON FIREBASE =====
 
+const firebaseConfig = {
+  apiKey: "AIzaSyD-vbevf0AjB_-2SdLXyQT8Ao1q5xj0Lps",
+  authDomain: "bingo-ea9ad.firebaseapp.com",
+  databaseURL: "https://bingo-ea9ad-default-rtdb.firebaseio.com",
+  projectId: "bingo-ea9ad",
+  storageBucket: "bingo-ea9ad.firebasestorage.app",
+  messagingSenderId: "1042802266359",
+  appId: "1:1042802266359:web:cb17e196beeeeb696783f2"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const db = firebase.database();
+const ref = db.ref("bingoCasaDeLuz");
+ref.on("value", function(snapshot){
+
+  const datos = snapshot.val();
+
+  if(!datos || !datos.drawn){
+    return;
+  }
+
+  const numeros = document.querySelectorAll(".numero");
+
+  numeros.forEach(function(celda){
+
+    if(celda.classList.contains("libre")){
+      return;
+    }
+
+    const valor = Number(celda.innerHTML);
+
+    if(datos.drawn.includes(valor)){
+      celda.classList.add("marcado");
+    }
+
+  });
+
+});
+    if(celda.classList.contains("libre")){
+      return;
+    }
+
+    const valor = Number(celda.innerHTML);
+
+    if(datos.drawn.includes(valor)){
+      celda.classList.add("marcado");
+    }
+
+  });
+
+});
 </script>
 
 </body>
