@@ -47,14 +47,34 @@ h1{
 <div class="carton" id="carton"></div>
 
 <script>
+
 let carton=document.getElementById("carton");
 
-for(let i=1;i<=25;i++){
-    let c=document.createElement("div");
-    c.className="casilla";
-    c.innerHTML=i;
-    carton.appendChild(c);
+function numero(min,max){
+   return Math.floor(Math.random()*(max-min+1))+min;
 }
+
+let usados=[];
+
+while(usados.length<25){
+   let n=numero(1,75);
+   if(!usados.includes(n)){
+      usados.push(n);
+   }
+}
+
+usados.forEach(function(n){
+   let c=document.createElement("div");
+   c.className="casilla";
+   c.innerHTML=n;
+
+   c.onclick=function(){
+      this.style.background="#7a1fa2";
+      this.style.color="white";
+   };
+
+   carton.appendChild(c);
+});
 </script>
 
 </body>
