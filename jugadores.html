@@ -6,245 +6,55 @@
 <title>Bingo Casa de Luz</title>
 
 <style>
-*{box-sizing:border-box}
-
 body{
- margin:0;
- padding:25px 10px 50px;
- font-family:Arial,sans-serif;
- text-align:center;
- background:#fff3d9;
- color:#222;
+    font-family:Arial,sans-serif;
+    background:#fff3d9;
+    text-align:center;
+    margin:0;
+    padding:20px;
 }
-
 h1{
- font-size:38px;
- margin:10px 0;
+    color:#7a1fa2;
 }
-
-h2{
- font-size:30px;
- margin:5px 0 25px;
+#ultima{
+    font-size:32px;
+    font-weight:bold;
+    color:red;
+    margin:20px;
 }
-
-#cartonNumero{
- font-size:27px;
- font-weight:bold;
- margin:25px 0;
-}
-
 .carton{
- max-width:600px;
- margin:auto;
- background:white;
- padding:18px;
- border-radius:25px;
- box-shadow:0 8px 20px rgba(0,0,0,.15);
+    display:grid;
+    grid-template-columns:repeat(5,70px);
+    gap:8px;
+    justify-content:center;
 }
-
-.fila{
- display:grid;
- grid-template-columns:repeat(5,1fr);
- gap:8px;
- margin-bottom:8px;
-}
-
-.letra{
- background:#8524ad;
- color:white;
- padding:18px 2px;
- font-size:30px;
- font-weight:bold;
- border-radius:12px;
-}
-
-.numero{
- background:#f4e5f8;
- border:3px solid #8524ad;
- padding:18px 2px;
- font-size:25px;
- font-weight:bold;
- border-radius:12px;
-}
-
-.numero.marcado{
- background:#8524ad;
- color:white;
-}
-
-.libre{
- background:#ffd966;
-}
-
-.ayuda{
- font-size:20px;
- margin-top:25px;
+.casilla{
+    background:white;
+    border:2px solid #7a1fa2;
+    border-radius:8px;
+    padding:15px;
+    font-size:22px;
+    font-weight:bold;
 }
 </style>
 </head>
-
 <body>
 
-<h1>🎱 BINGO VIRTUAL</h1>
-<h2>✨ Casa de Luz ✨</h2>
+<h1>🎱 Bingo Casa de Luz</h1>
 
-<div id="cartonNumero"></div>
+<div id="ultima">Última bolilla: --</div>
 
-<div class="carton">
-
-<div class="fila">
-<div class="letra">B</div>
-<div class="letra">I</div>
-<div class="letra">N</div>
-<div class="letra">G</div>
-<div class="letra">O</div>
-</div>
-
-<div id="numeros"></div>
-
-</div>
-
-<div class="ayuda">
-👉 Tocá cada número para marcarlo.
-</div>
+<div class="carton" id="carton"></div>
 
 <script>
+let carton=document.getElementById("carton");
 
-const parametros = new URLSearchParams(window.location.search);
-
-let carton = Number(parametros.get("c"));
-
-if(!carton || carton < 1){
- carton = 1;
+for(let i=1;i<=25;i++){
+    let c=document.createElement("div");
+    c.className="casilla";
+    c.innerHTML=i;
+    carton.appendChild(c);
 }
-
-document.getElementById("cartonNumero").innerHTML =
-"🎟️ CARTÓN N.º " + String(carton).padStart(3,"0");
-
-function random(seed){
- let x = Math.sin(seed) * 10000;
- return x - Math.floor(x);
-}
-
-function crearColumna(min,max,seed){
-
- let numeros=[];
- let intento=1;
-
- while(numeros.length < 5){
-
-   let r=random(seed + intento);
-
-   let numero=
-   Math.floor(r*(max-min+1))+min;
-
-   if(!numeros.includes(numero)){
-      numeros.push(numero);
-   }
-
-   intento++;
- }
-
- return numeros.sort(function(a,b){
-   return a-b;
- });
-}
-
-let B=crearColumna(1,15,carton*100+1);
-let I=crearColumna(16,30,carton*100+20);
-let N=crearColumna(31,45,carton*100+40);
-let G=crearColumna(46,60,carton*100+60);
-let O=crearColumna(61,75,carton*100+80);
-
-let columnas=[B,I,N,G,O];
-
-let zona=document.getElementById("numeros");
-
-for(let fila=0;fila<5;fila++){
-
- let nuevaFila=document.createElement("div");
- nuevaFila.className="fila";
-
- for(let columna=0;columna<5;columna++){
-
-   let casilla=document.createElement("div");
-
-   casilla.className="numero";
-
-   if(fila===2 && columna===2){
-
-      casilla.innerHTML="★";
-      casilla.classList.add("libre","marcado");
-
-   }else{
-
-      casilla.innerHTML=columnas[columna][fila];
-
-      casilla.addEventListener("click",function(){
-         this.classList.toggle("marcado");
-      });
-
-   }
-
-   nuevaFila.appendChild(casilla);
- }
-
- zona.appendChild(nuevaFila);
-}
-// ===== CONEXIÓN CON FIREBASE =====
-
-const firebaseConfig = {
-  apiKey: "AIzaSyD-vbevf0AjB_-2SdLXyQT8Ao1q5xj0Lps",
-  authDomain: "bingo-ea9ad.firebaseapp.com",
-  databaseURL: "https://bingo-ea9ad-default-rtdb.firebaseio.com",
-  projectId: "bingo-ea9ad",
-  storageBucket: "bingo-ea9ad.firebasestorage.app",
-  messagingSenderId: "1042802266359",
-  appId: "1:1042802266359:web:cb17e196beeeeb696783f2"
-};
-
-firebase.initializeApp(firebaseConfig);
-
-const db = firebase.database();
-const ref = db.ref("bingoCasaDeLuz");
-ref.on("value", function(snapshot){
-
-  const datos = snapshot.val();
-
-  if(!datos || !datos.drawn){
-    return;
-  }
-
-  const numeros = document.querySelectorAll(".numero");
-
-  numeros.forEach(function(celda){
-
-    if(celda.classList.contains("libre")){
-      return;
-    }
-
-    const valor = Number(celda.innerHTML);
-
-    if(datos.drawn.includes(valor)){
-      celda.classList.add("marcado");
-    }
-
-  });
-
-});
-    if(celda.classList.contains("libre")){
-      return;
-    }
-
-    const valor = Number(celda.innerHTML);
-
-    if(datos.drawn.includes(valor)){
-      celda.classList.add("marcado");
-    }
-
-  });
-
-});
 </script>
 
 </body>
