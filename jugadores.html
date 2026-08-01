@@ -49,18 +49,22 @@ h1{
 <script>
 
 let carton=document.getElementById("carton");
+const params = new URLSearchParams(window.location.search);
+const numeroCarton = parseInt(params.get("carton")) || 1;
 
+function generarCarton(numero){
+    let usados = [];
+    while(usados.length < 25){
+        let n = Math.floor(Math.random()*75)+1;
+        if(!usados.includes(n)){
+            usados.push(n);
+        }
+    }
+    return usados;
+}
+ let usados = generarCarton(numeroCarton);
 function numero(min,max){
    return Math.floor(Math.random()*(max-min+1))+min;
-}
-
-let usados=[];
-
-while(usados.length<25){
-   let n=numero(1,75);
-   if(!usados.includes(n)){
-      usados.push(n);
-   }
 }
 
 usados.forEach(function(n){
