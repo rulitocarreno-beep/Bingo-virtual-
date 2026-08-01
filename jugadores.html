@@ -113,7 +113,11 @@ function generarCarton(numero){
     }
     return usados;
 }
- let usados = generarCarton(numeroCarton);
+  let usados = CARTONES[numeroCarton];
+
+if (!usados || usados.length === 0) {
+    usados = generarCarton(numeroCarton);
+}
 function numero(min,max){
    return Math.floor(Math.random()*(max-min+1))+min;
 }
