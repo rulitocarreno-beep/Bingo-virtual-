@@ -170,6 +170,29 @@ usados.forEach(function(n){
    carton.appendChild(c);
 });
 </script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-database-compat.js"></script>
 
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyD-vbevf0AjB_-2SdLXyQT8Ao1q5xj0Lps",
+  authDomain: "bingo-ea9ad.firebaseapp.com",
+  databaseURL: "https://bingo-ea9ad-default-rtdb.firebaseio.com",
+  projectId: "bingo-ea9ad",
+  storageBucket: "bingo-ea9ad.firebasestorage.app",
+  messagingSenderId: "1042802266359",
+  appId: "1:1042802266359:web:cb17e196beeeeb696783f2"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const ref = firebase.database().ref("bingoCasaDeLuz");
+
+ref.on("value", (s) => {
+    const d = s.val() || {};
+    document.getElementById("ultima").innerHTML =
+        "Última bolilla: " + (d.current ?? "--");
+});
+</script>
 </body>
 </html>
