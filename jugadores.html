@@ -162,7 +162,7 @@ function numero(min,max){
 usados.forEach(function(n){
    let c=document.createElement("div");
    c.className="casilla";
-   c.innerHTML=n;
+   c.innerHTML = (n === 0) ? "🎁" : n;
 
    c.onclick=function(){
       this.style.background="#7a1fa2";
