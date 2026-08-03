@@ -27,7 +27,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
-const max=75, ref=db.ref("bingoCasaDeLuz");
+const max=90, ref=db.ref("bingoCasaDeLuz"); ref=db.ref("bingoCasaDeLuz");
 let drawn=[];
 function render(){let g=document.getElementById("grid");g.innerHTML="";for(let i=1;i<=max;i++){let e=document.createElement("div");e.className="n"+(drawn.includes(i)?" hit":"");e.textContent=i;g.appendChild(e)}}
 ref.on("value",s=>{let d=s.val()||{drawn:[],current:null};drawn=d.drawn||[];document.getElementById("ball").textContent=d.current??"—";document.getElementById("status").textContent=drawn.length?`${drawn.length} bolilla${drawn.length===1?"":"s"} sorteada${drawn.length===1?"":"s"}`:"Lista para comenzar";render()});
