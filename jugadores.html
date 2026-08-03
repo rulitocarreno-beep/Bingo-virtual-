@@ -51,6 +51,12 @@ h1{
 let carton=document.getElementById("carton");
 const params = new URLSearchParams(window.location.search);
 const numeroCarton = parseInt(params.get("carton")) || 1;
+document.body.insertAdjacentHTML(
+  "afterbegin",
+  "<h2 style='color:#7a1fa2;'>🎟️ Cartón " +
+  String(numeroCarton).padStart(3,"0") +
+  "</h2>"
+);
 const CARTONES = {
   1: [ 
 7,29,38,58,70,
