@@ -56,10 +56,14 @@ for (let i = 1; i <= 30; i++) {
     fila.className = "carton";
 
     let numero = String(i).padStart(3, "0");
-
-    fila.innerHTML =
-        "<span>🎟️ Cartón " + numero + "</span>" +
-        "<a href='jugadores.html?carton=" + i + "'>Abrir</a>";
+const enlace = "https://rulitocarreno-beep.github.io/Bingo-virtual-/jugadores.html?carton=" + i;
+fila.innerHTML =
+    "<span>🎟️ Cartón " + numero + "</span>" +
+    "<div>" +
+    "<a href='jugadores.html?carton=" + i + "'>Abrir</a> " +
+    "<a href='https://wa.me/?text=" + encodeURIComponent("Este es tu cartón del Bingo Casa de Luz: " + enlace) + "'>WhatsApp</a>" +
+    "</div>";
+    
 
     lista.appendChild(fila);
 }
