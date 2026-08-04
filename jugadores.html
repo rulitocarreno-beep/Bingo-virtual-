@@ -145,22 +145,25 @@ const CARTONES = {
   49: [17, 64, 70, 13, 9, 52, 37, 67, 60, 65, 35, 41, 0, 36, 68, 59, 39, 46, 16, 7, 44, 6, 21, 24, 48],
   50: [37, 69, 29, 3, 36, 27, 18, 1, 61, 21, 35, 38, 0, 23, 70, 33, 66, 17, 20, 59, 5, 25, 4, 56, 24],
   
-};
-function generarCarton(numero){
+
+function generarCarton(){
     let usados = [];
-    while(usados.length < 25){
-        let n = Math.floor(Math.random()*75)+1;
+    while(usados.length < 15){
+        let n = Math.floor(Math.random()*90)+1;
         if(!usados.includes(n)){
             usados.push(n);
         }
     }
     return usados;
 }
-  let usados = CARTONES[numeroCarton];
+
+  let usados =  
+  CARTONES[numeroCarton];
 
 if (!usados || usados.length === 0) {
-    usados = generarCarton(numeroCarton);
+    usados = generarCarton();
 }
+
 function numero(min,max){
    return Math.floor(Math.random()*(max-min+1))+min;
 }
